@@ -2,8 +2,10 @@ const choiseOptions = ['rock', 'paper', 'scissors'];
 // item in 1st array in winningCombinations beats item in 2nd array on the same possition (key)
 // winningCombinations[0][0] beats winningCombinations[1][0] 
 const winningCombinations = [['rock', 'paper', 'scissors'], ['scissors', 'rock', 'paper']];
+let winner = null;
 let humanScore = 0;
 let computerScore = 0;
+
 
 function getComputerChoice() {
     let computerChoice = choiseOptions[Math.floor(Math.random() * choiseOptions.length)];
@@ -23,7 +25,8 @@ function validateHumanChoise(str) {
         return result;
     }
     else {
-        getHumanChoice();
+        alert('Invalid input. Reset the game');
+        throw new Error('Invalid input');
     }
 }
 
@@ -31,34 +34,53 @@ function getWinner(human, computer) {
     let humanArrayIndex = winningCombinations[0].indexOf(human);
     let computerArrayIndex = winningCombinations[1].indexOf(computer);
     if (humanArrayIndex === computerArrayIndex) {
-        return 'human';
+        winner = 'human';
+        return winner;
     }
     else {
+        winner = 'computer';
         return 'computer';
     }
 }
 
 function playRound(humanChoice, computerChoice) {
-    console.log(`You choose ${humanChoice}, Computer coose ${computerChoice}`)
-
+    console.log(`You choose ${humanChoice}, Computer choose ${computerChoice}`)
 
     if (humanChoice === computerChoice) {
         console.log("It's a tie!");
 
     } else {
-        let winner = getWinner(humanChoice, computerChoice);
+        winner = getWinner(humanChoice, computerChoice);
 
-        if (winner = 'computer') {
+        if (winner === 'computer') {
             console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
-            computerScore += 1;
         }
         else {
             console.log(`You win! ${humanChoice} beats ${computerChoice}`);
-            humanScore += 0;
         }
+    }
+}
+
+function playGame(){
+    playRound(getHumanChoice(), getComputerChoice());
+
+    switch(winner) {
+        case 'human':
+            humanScore += 1;
+            break;
+        case 'computer':
+            computerScore += 1;
+            break;
     }
 
     console.log(`Game score: Player: ${humanScore}, Computer: ${computerScore}`)
+
+    winner = null;
 }
 
-playRound(getHumanChoice(), getComputerChoice());
+playGame();
+playGame();
+playGame();
+playGame();
+playGame();
+playGame();
