@@ -62,6 +62,15 @@ h1 {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #6eb378;
+}
+
+.button:active {
+    background-color: rgb(184, 114, 114);
 }
 
 .info {

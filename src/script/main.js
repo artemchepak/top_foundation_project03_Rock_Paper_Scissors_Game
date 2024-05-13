@@ -6,6 +6,9 @@ let winner = null;
 let humanScore = 0;
 let computerScore = 0;
 
+let btn = document.querySelectorAll('.button');
+let humanInput = '';
+
 
 function getComputerChoice() {
     let computerChoice = choiseOptions[Math.floor(Math.random() * choiseOptions.length)];
@@ -13,7 +16,6 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    let humanInput = prompt('Enter your choise. Valid options are: Rock, Paper, Scissors');
     let humanChoice = validateHumanChoise(humanInput);
     return humanChoice;
 }
@@ -78,9 +80,12 @@ function playGame(){
     winner = null;
 }
 
-playGame();
-playGame();
-playGame();
-playGame();
-playGame();
-playGame();
+//add listner to all buttons
+btn.forEach(function(button) {
+    button.addEventListener("click", function() {
+      // do something when the button is clicked
+      humanInput = button.innerHTML;
+      playGame();
+    });
+  });
+  
