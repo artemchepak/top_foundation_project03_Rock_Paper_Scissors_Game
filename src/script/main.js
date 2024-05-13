@@ -70,10 +70,10 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-function playGame(){
+function playGame() {
     playRound(getHumanChoice(), getComputerChoice());
 
-    switch(winner) {
+    switch (winner) {
         case 'human':
             humanScore += 1;
             break;
@@ -85,14 +85,37 @@ function playGame(){
     scoreOutput.innerHTML = `Score: You - ${humanScore}, Computer - ${computerScore}`;
 
     winner = null;
+    setTimeout( function(){
+        endGame();
+    }, 1);
 }
 
 //add listner to all buttons
-btn.forEach(function(button) {
-    button.addEventListener("click", function() {
-      // do something when the button is clicked
-      humanInput = button.innerHTML;
-      playGame();
+btn.forEach(function (button) {
+    button.addEventListener("click", function () {
+        // do something when the button is clicked
+        humanInput = button.innerHTML;
+
+        // if (humanScore === 5 || computerScore === 5) {
+        //     endGame();
+        // }
+        // else {
+        //     playGame();
+        // }
+
+        playGame();
     });
-  });
-  
+});
+
+function endGame(){
+    if (humanScore === 5) {
+        alert('You win! Refresh page to play again.');
+        window.location.reload();
+    }
+    else if (computerScore === 5) {
+        alert('You lose! Refresh page to play again.');
+        window.location.reload();
+    } else {
+        return;
+    }
+}
