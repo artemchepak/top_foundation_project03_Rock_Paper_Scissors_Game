@@ -9,6 +9,11 @@ let computerScore = 0;
 let btn = document.querySelectorAll('.button');
 let humanInput = '';
 
+let humanChoiceOutput = document.querySelector('.user-choise');
+let computerChoiceOutput = document.querySelector('.computer-choise');
+let resultOutput = document.querySelector('.results');
+let scoreOutput = document.querySelector('.score');
+
 
 function getComputerChoice() {
     let computerChoice = choiseOptions[Math.floor(Math.random() * choiseOptions.length)];
@@ -46,19 +51,21 @@ function getWinner(human, computer) {
 }
 
 function playRound(humanChoice, computerChoice) {
-    console.log(`You choose ${humanChoice}, Computer choose ${computerChoice}`)
+
+    humanChoiceOutput.innerHTML = `You picked ${humanChoice}`;
+    computerChoiceOutput.innerHTML = `Computer picked  ${computerChoice}`;
 
     if (humanChoice === computerChoice) {
-        console.log("It's a tie!");
+        resultOutput.innerHTML = "It's a tie!";
 
     } else {
         winner = getWinner(humanChoice, computerChoice);
 
         if (winner === 'computer') {
-            console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
+            resultOutput.innerHTML = 'You lose!';
         }
         else {
-            console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+            resultOutput.innerHTML = 'You win!';
         }
     }
 }
@@ -75,7 +82,7 @@ function playGame(){
             break;
     }
 
-    console.log(`Game score: Player: ${humanScore}, Computer: ${computerScore}`)
+    scoreOutput.innerHTML = `Score: You - ${humanScore}, Computer - ${computerScore}`;
 
     winner = null;
 }
